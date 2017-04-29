@@ -16,10 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-        setOnClickListeners();
+        setListeners();
     }
 
-    private void setOnClickListeners() {
+    private void setListeners() {
 
     }
 
