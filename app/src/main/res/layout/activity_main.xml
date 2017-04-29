@@ -6,13 +6,440 @@
     android:layout_height="match_parent"
     tools:context="com.projects.thirtyseven.activecameraviewer2.MainActivity">
 
-    <TextView
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <FrameLayout
+                android:id="@+id/cameraLinear1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageView
+                    android:id="@+id/imageStatus1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/grey_status" />
+
+                <ImageView
+                    android:id="@+id/imageCamera1"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    app:srcCompat="@drawable/camera_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="1"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+
+            </FrameLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/camera"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/cameraNumberText1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="1"-->
+            <!--android:textColor="#000000"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <FrameLayout
+                android:id="@+id/cameraLinear2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageView
+                    android:id="@+id/imageStatus2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/grey_status" />
+
+                <ImageView
+                    android:id="@+id/imageCamera2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    app:srcCompat="@drawable/camera_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="2"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/camera"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/cameraNumberText2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="2"-->
+            <!--android:textColor="#000000"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <FrameLayout
+                android:id="@+id/cameraLinear3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageView
+                    android:id="@+id/imageStatus3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/grey_status" />
+
+                <ImageView
+                    android:id="@+id/imageCamera3"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    app:srcCompat="@drawable/camera_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="3"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/camera"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/cameraNumberText3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="3"-->
+            <!--android:textColor="#000000"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <FrameLayout
+                android:id="@+id/cameraLinear4"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageView
+                    android:id="@+id/imageStatus4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/grey_status" />
+
+                <ImageView
+                    android:id="@+id/imageCamera4"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    app:srcCompat="@drawable/camera_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="4"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/camera"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/cameraNumberText4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="4"-->
+            <!--android:textColor="#000000"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <FrameLayout
+                android:id="@+id/cameraLinear5"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageView
+                    android:id="@+id/imageStatus5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/grey_status" />
+
+                <ImageView
+                    android:id="@+id/imageCamera5"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    app:srcCompat="@drawable/camera_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="5"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/camera"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/cameraNumberText5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="5"-->
+            <!--android:textColor="#000000"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <FrameLayout
+                android:id="@+id/cameraLinear6"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageView
+                    android:id="@+id/imageStatus6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/grey_status" />
+
+                <ImageView
+                    android:id="@+id/imageCamera6"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    app:srcCompat="@drawable/camera_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="6"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/camera"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/cameraNumberText6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="6"-->
+            <!--android:textColor="#000000"-->
+            <!--tools:layout_editor_absoluteX="140dp"-->
+            <!--tools:layout_editor_absoluteY="83dp" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/relativeLayout"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+    </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>
