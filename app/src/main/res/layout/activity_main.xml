@@ -31,7 +31,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
-                android:id="@+id/cameraLinear1"
+                android:id="@+id/cameraFrameLayoutButton1"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -40,7 +40,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/imageStatus1"
+                    android:id="@+id/imageStatusCamera1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/grey_status" />
@@ -99,7 +99,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
-                android:id="@+id/cameraLinear2"
+                android:id="@+id/cameraFrameLayoutButton2"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -108,7 +108,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/imageStatus2"
+                    android:id="@+id/imageStatusCamera2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/grey_status" />
@@ -165,7 +165,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
-                android:id="@+id/cameraLinear3"
+                android:id="@+id/cameraFrameLayoutButton3"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -174,7 +174,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/imageStatus3"
+                    android:id="@+id/imageStatusCamera3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/grey_status" />
@@ -232,7 +232,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
-                android:id="@+id/cameraLinear4"
+                android:id="@+id/cameraFrameLayoutButton4"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -241,7 +241,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/imageStatus4"
+                    android:id="@+id/imageStatusCamera4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/grey_status" />
@@ -299,7 +299,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
-                android:id="@+id/cameraLinear5"
+                android:id="@+id/cameraFrameLayoutButton5"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -308,7 +308,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/imageStatus5"
+                    android:id="@+id/imageStatusCamera5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/grey_status" />
@@ -366,7 +366,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
-                android:id="@+id/cameraLinear6"
+                android:id="@+id/cameraFrameLayoutButton6"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -375,7 +375,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/imageStatus6"
+                    android:id="@+id/imageStatusCamera6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/grey_status" />
