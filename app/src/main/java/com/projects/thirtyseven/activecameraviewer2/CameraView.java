@@ -5,4 +5,8 @@ package com.projects.thirtyseven.activecameraviewer2;
  */
 
 class CameraView {
+    public void update(CameraModel cameraModel) {
+cameraModel.getCamId();
+
+    }
 }

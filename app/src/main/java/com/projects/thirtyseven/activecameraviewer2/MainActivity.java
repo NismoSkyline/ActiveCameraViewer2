@@ -56,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
         int id = v.getId();
         cameraController.clickCamera(id);
         cameraView.update(cameraModel);
+        cameraImageChange();
+    }
+
+    private void cameraImageChange(ImageView v) {
+        if ( == 1) {
+            v.setImageResource(R.drawable.grey_status);
+        } else if ( == 2) {
+            v.setImageResource(R.drawable.yellow_status);
+        } else if ( == 3) {
+            v.setImageResource(R.drawable.red_status);
+        }
     }
 
     private void setListeners() {
@@ -76,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
         imageStatusCamera4 = (ImageView) findViewById(R.id.imageStatusCamera4);
         imageStatusCamera5 = (ImageView) findViewById(R.id.imageStatusCamera5);
         imageStatusCamera6 = (ImageView) findViewById(R.id.imageStatusCamera6);
+        cameraFrameLayoutButton1 = (FrameLayout) findViewById(R.id.cameraFrameLayoutButton1);
+        cameraFrameLayoutButton2 = (FrameLayout) findViewById(R.id.cameraFrameLayoutButton2);
+        cameraFrameLayoutButton3 = (FrameLayout) findViewById(R.id.cameraFrameLayoutButton3);
+        cameraFrameLayoutButton4 = (FrameLayout) findViewById(R.id.cameraFrameLayoutButton4);
+        cameraFrameLayoutButton5 = (FrameLayout) findViewById(R.id.cameraFrameLayoutButton5);
+        cameraFrameLayoutButton6 = (FrameLayout) findViewById(R.id.cameraFrameLayoutButton6);
 
         cameraModel = new CameraModel();
         cameraController = new CameraController(cameraModel);
