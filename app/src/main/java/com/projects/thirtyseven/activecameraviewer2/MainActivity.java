@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private CameraController cameraController;
     private CameraView cameraView;
     private CameraModel cameraModel;
-    //Camera camera;
 
 
     @Override
@@ -47,28 +46,7 @@ public class MainActivity extends AppCompatActivity {
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int id = v.getId();
                 update(v);
-                /*switch (id) {
-                    case R.id.cameraFrameLayoutButton1:
-                        //setImageStatus(getStatusInfo(v));
-                        update(v);
-                        break;
-                    case R.id.cameraFrameLayoutButton2:
-                        //setImageStatus(getStatusInfo(v));
-                        break;
-                    case R.id.cameraFrameLayoutButton3:
-                        //setImageStatus(getStatusInfo(v));
-                        break;
-                    case R.id.cameraFrameLayoutButton4:
-                        //setImageStatus(getStatusInfo(v));
-                        break;
-                    case R.id.cameraFrameLayoutButton5:
-                        //setImageStatus(getStatusInfo(v));
-                        break;
-                    case R.id.cameraFrameLayoutButton6:
-                        //setImageStatus(getStatusInfo(v));
-                        break;*/
             }
         };
     }
@@ -78,49 +56,6 @@ public class MainActivity extends AppCompatActivity {
         int id = v.getId();
         cameraController.clickCamera(id);
         cameraView.update(cameraModel);
-    }
-
-    private void getStatusInfo(View v) {
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        switch (v.getId()) {
-            case R.id.cameraFrameLayoutButton1:
-                break;
-            case R.id.cameraFrameLayoutButton2:
-                break;
-            case R.id.cameraFrameLayoutButton3:
-                break;
-            case R.id.cameraFrameLayoutButton4:
-                break;
-            case R.id.cameraFrameLayoutButton5:
-                break;
-            case R.id.cameraFrameLayoutButton6:
-                break;
-        }
     }
 
     private void setListeners() {
