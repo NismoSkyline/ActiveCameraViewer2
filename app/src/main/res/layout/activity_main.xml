@@ -7,6 +7,7 @@
     tools:context="com.projects.thirtyseven.activecameraviewer2.MainActivity">
 
     <GridLayout
+        android:id="@+id/cameraGridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -22,13 +23,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
                 android:id="@+id/cameraFrameLayoutButton1"
@@ -65,39 +59,6 @@
 
             </FrameLayout>
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="@string/camera"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/cameraNumberText1"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="1"-->
-            <!--android:textColor="#000000"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
-
             <FrameLayout
                 android:id="@+id/cameraFrameLayoutButton2"
                 android:layout_width="120dp"
@@ -130,39 +91,6 @@
                     android:textSize="25dp"
                     android:textStyle="bold" />
             </FrameLayout>
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="@string/camera"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/cameraNumberText2"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="2"-->
-            <!--android:textColor="#000000"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
                 android:id="@+id/cameraFrameLayoutButton3"
@@ -198,39 +126,6 @@
 
             </FrameLayout>
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="@string/camera"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/cameraNumberText3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="3"-->
-            <!--android:textColor="#000000"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
-
             <FrameLayout
                 android:id="@+id/cameraFrameLayoutButton4"
                 android:layout_width="120dp"
@@ -264,39 +159,6 @@
                     android:textStyle="bold" />
 
             </FrameLayout>
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="@string/camera"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/cameraNumberText4"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="4"-->
-            <!--android:textColor="#000000"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
 
             <FrameLayout
                 android:id="@+id/cameraFrameLayoutButton5"
@@ -332,39 +194,6 @@
 
             </FrameLayout>
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="@string/camera"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/cameraNumberText5"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="5"-->
-            <!--android:textColor="#000000"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
-
             <FrameLayout
                 android:id="@+id/cameraFrameLayoutButton6"
                 android:layout_width="120dp"
@@ -399,31 +228,6 @@
 
             </FrameLayout>
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="@string/camera"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/cameraNumberText6"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="6"-->
-            <!--android:textColor="#000000"-->
-            <!--tools:layout_editor_absoluteX="140dp"-->
-            <!--tools:layout_editor_absoluteY="83dp" />-->
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
     </GridLayout>
 
     <RelativeLayout
