@@ -6,27 +6,15 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseDatabase database;
-    DatabaseReference databaseReference;
-
     GridLayout cameraGridLayout;
     ArrayList<FrameLayout> cameraFrameLayoutButtons;
-    ArrayList<ImageView> imageStatusCameras;
 
     View.OnClickListener onClickListener;
 
     private CameraController cameraController;
-    private CameraView cameraView;
     private CameraModel cameraModel;
 
 
@@ -37,48 +25,40 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-        cameraView.update(cameraModel);
+        refreshView();
 
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update(v);
+                cameraController.clickCamera(String.valueOf(v.getId()));
+                refreshView();
             }
         };
     }
 
-
-    private void update(View v) {
-        int id = v.getId();
-        cameraController.clickCamera(id);
-        cameraView.update(cameraModel);
-        cameraImageChange();
-    }
-
-    private void cameraImageChange(ImageView v) {
-        if ( == 1) {
-            v.setImageResource(R.drawable.grey_status);
-        } else if ( == 2) {
-            v.setImageResource(R.drawable.yellow_status);
-        } else if ( == 3) {
-            v.setImageResource(R.drawable.red_status);
+    private void refreshView() {
+        for (FrameLayout button : cameraFrameLayoutButtons){
+            ImageView image = (ImageView)button.getChildAt(0);
+            int cameraStatus = cameraModel.getCameraStatus(String.valueOf(button.getId()));
+            if (cameraStatus == 0) image.setImageResource(R.drawable.grey_status);
+            else if (cameraStatus == 1) image.setImageResource(R.drawable.yellow_status);
+            else if ( cameraStatus == 2) image.setImageResource(R.drawable.red_status);
         }
     }
 
     private void init() {
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Camera");
+        cameraFrameLayoutButtons = new ArrayList<>();
+        ArrayList<String> listOfCameraNames = new ArrayList<>();
 
         cameraGridLayout = (GridLayout) findViewById(R.id.cameraGridLayout);
         for (int i = 0; i < cameraGridLayout.getChildCount(); i++){
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             cameraFrameLayoutButtons.add(button);
+            listOfCameraNames.add(String.valueOf(button.getId()));
             button.setOnClickListener(onClickListener);
-            imageStatusCameras.add((ImageView) button.getChildAt(0));
         }
 
-        cameraModel = new CameraModel();
+        cameraModel = new CameraModel(listOfCameraNames);
         cameraController = new CameraController(cameraModel);
-        cameraView = new CameraView();
     }
 }
