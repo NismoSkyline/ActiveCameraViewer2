@@ -1,8 +1,10 @@
 package com.projects.thirtyseven.activecameraviewer2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listOfCameraNames;  //ArrayList в котором будут находится имена камер
 
     View.OnClickListener onClickListener;
+    Button toViewerActivity;
 
     private CameraController cameraController;
     private CameraModel cameraModel;
@@ -26,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
+
+        toViewerActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ViewerActivity.class);
+                startActivity(i);
+            }
+        });
 
         refreshView();  //Мы используем MainActivity как Представление следоватьельно мы должны его обновить
 
@@ -79,5 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         cameraModel = new CameraModel(listOfCameraNames);
         cameraController = new CameraController(cameraModel);
+
+        toViewerActivity = (Button) findViewById(R.id.goToViewerActivity);
     }
 }

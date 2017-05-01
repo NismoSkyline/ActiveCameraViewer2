@@ -11,7 +11,7 @@ class CameraController {
         model = cameraModel;
     }
 
-    public void clickCamera(int id) {
+    public void clickCamera(String id) {
         checkAllcameraStatus();
         model.setCameraTrigger(id);
     }
