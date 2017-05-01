@@ -28,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
             imageStatusCamera5,
             imageStatusCamera6;
     View.OnClickListener onClickListener;
-    Camera camera;
+    private CameraController cameraController;
+    private CameraView cameraView;
+    private CameraModel cameraModel;
+    //Camera camera;
 
 
     @Override
@@ -39,32 +42,42 @@ public class MainActivity extends AppCompatActivity {
         init();
         setListeners();
 
+        cameraView.update(cameraModel);
+
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = v.getId();
-                switch (id) {
+                update(v);
+                /*switch (id) {
                     case R.id.cameraFrameLayoutButton1:
-                        setImageStatus(getStatusInfo(v));
+                        //setImageStatus(getStatusInfo(v));
+                        update(v);
                         break;
                     case R.id.cameraFrameLayoutButton2:
-                        setImageStatus(getStatusInfo(v));
+                        //setImageStatus(getStatusInfo(v));
                         break;
                     case R.id.cameraFrameLayoutButton3:
-                        setImageStatus(getStatusInfo(v));
+                        //setImageStatus(getStatusInfo(v));
                         break;
                     case R.id.cameraFrameLayoutButton4:
-                        setImageStatus(getStatusInfo(v));
+                        //setImageStatus(getStatusInfo(v));
                         break;
                     case R.id.cameraFrameLayoutButton5:
-                        setImageStatus(getStatusInfo(v));
+                        //setImageStatus(getStatusInfo(v));
                         break;
                     case R.id.cameraFrameLayoutButton6:
-                        setImageStatus(getStatusInfo(v));
-                        break;
-                }
+                        //setImageStatus(getStatusInfo(v));
+                        break;*/
             }
         };
+    }
+
+
+    private void update(View v) {
+        int id = v.getId();
+        cameraController.clickCamera(id);
+        cameraView.update(cameraModel);
     }
 
     private void getStatusInfo(View v) {
@@ -122,12 +135,15 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Camera");
-        camera = new Camera();
         imageStatusCamera1 = (ImageView) findViewById(R.id.imageStatusCamera1);
         imageStatusCamera2 = (ImageView) findViewById(R.id.imageStatusCamera2);
         imageStatusCamera3 = (ImageView) findViewById(R.id.imageStatusCamera3);
         imageStatusCamera4 = (ImageView) findViewById(R.id.imageStatusCamera4);
         imageStatusCamera5 = (ImageView) findViewById(R.id.imageStatusCamera5);
         imageStatusCamera6 = (ImageView) findViewById(R.id.imageStatusCamera6);
+
+        cameraModel = new CameraModel();
+        cameraController = new CameraController(cameraModel);
+        cameraView = new CameraView();
     }
 }
