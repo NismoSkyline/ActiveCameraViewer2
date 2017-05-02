@@ -10,15 +10,21 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class ViewerActivity extends AppCompatActivity {
     Spinner spinner;
-    ArrayList<String> listOfCameraNames;
-
-    private CameraController cameraController;
-    private CameraModel cameraModel;
     ConstraintLayout layout;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    int cameraIndex;
+    Camera camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +36,44 @@ public class ViewerActivity extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int listOfCameraNamess, long id) {
-                cameraModel.getCameraStatus(listOfCameraNames);
-                int cameraStatus = cameraModel.getCameraStatus(String.valueOf(listOfCameraNames));
-                if (cameraStatus == 0) layout.setBackgroundResource(R.drawable.grey_status);
-                else if (cameraStatus == 1) layout.setBackgroundResource(R.drawable.yellow_status);
-                else if (cameraStatus == 2) layout.setBackgroundResource(R.drawable.red_status);
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Selected: " + listOfCameraNamess, Toast.LENGTH_SHORT);
-                toast.show();
+            public void onItemSelected(AdapterView<?> prent, View view, int position, long id) {
+                cameraIndex = position;
+                databaseReference.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        ArrayList <Camera> camerasArrayList = dataSnapshot.getValue(Camera.class);
+                        //получение обьектов из ветки и запись их в ArrayList
+                        camera = camerasArrayList.get(cameraIndex);
+                        if (camera.getStatus == 1) layout.setBackgroundResource(R.drawable.grey_status);
+                        else if (camera.getStatus == 2) layout.setBackgroundResource(R.drawable.yellow_status);
+                        else if (camera.getStatus == 3) layout.setBackgroundResource(R.drawable.red_status);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Selected: " + cameraIndex, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -58,9 +92,10 @@ public class ViewerActivity extends AppCompatActivity {
     }
 
     private void init() {
-        listOfCameraNames = new ArrayList<>();
         spinner = (Spinner) findViewById(R.id.spinner);
-        cameraModel = new CameraModel(listOfCameraNames);
         layout = (ConstraintLayout) findViewById(R.id.constraintLayout);
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("Camera");
+        camera = new Camera();
     }
 }
