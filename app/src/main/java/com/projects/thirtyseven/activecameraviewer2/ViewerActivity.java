@@ -23,6 +23,8 @@ public class ViewerActivity extends AppCompatActivity {
     ConstraintLayout layout;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+    ArrayList<String> listOfCameraNames;
+    ArrayList<Camera> camerasArrayList;
     int cameraIndex;
     Camera camera;
 
@@ -46,12 +48,12 @@ public class ViewerActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        ArrayList <Camera> camerasArrayList = dataSnapshot.getValue(Camera.class);
+                        camerasArrayList.add(dataSnapshot.getValue(Camera.class));
                         //получение обьектов из ветки и запись их в ArrayList
                         camera = camerasArrayList.get(cameraIndex);
-                        if (camera.getStatus == 1) layout.setBackgroundResource(R.drawable.grey_status);
-                        else if (camera.getStatus == 2) layout.setBackgroundResource(R.drawable.yellow_status);
-                        else if (camera.getStatus == 3) layout.setBackgroundResource(R.drawable.red_status);
+                        if (camera.getStatus() == 1) layout.setBackgroundResource(R.drawable.grey_status);
+                        else if (camera.getStatus() == 2) layout.setBackgroundResource(R.drawable.yellow_status);
+                        else if (camera.getStatus() == 3) layout.setBackgroundResource(R.drawable.red_status);
                         Toast toast = Toast.makeText(getApplicationContext(), "Selected: " + cameraIndex, Toast.LENGTH_SHORT);
                         toast.show();
                     }
@@ -97,5 +99,7 @@ public class ViewerActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Camera");
         camera = new Camera();
+        listOfCameraNames = new ArrayList<>();
+        camerasArrayList = new ArrayList<>();
     }
 }
