@@ -1,6 +1,8 @@
 package com.projects.thirtyseven.activecameraviewer2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, ViewerActivity.class);
+                i.putStringArrayListExtra("listOfCameraNames", listOfCameraNames);
                 startActivity(i);
             }
         });
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             //Получаем ребёнка по его индексу
             cameraFrameLayoutButtons.add(button);
-            listOfCameraNames.add(String.valueOf(button.getId()));
+            listOfCameraNames.add(getResources().getResourceEntryName(button.getId()));
             //Добавили элемент в ArrayList
             button.setOnClickListener(onClickListener);
             //Добавили Listener

@@ -1,5 +1,6 @@
 package com.projects.thirtyseven.activecameraviewer2;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 
 public class ViewerActivity extends AppCompatActivity {
     Spinner spinner;
-    ConstraintLayout layout;
+    ImageView statusView;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     ArrayList<String> listOfCameraNames;
@@ -32,6 +34,11 @@ public class ViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
+        getSupportActionBar().hide();
+
+        Intent intent = getIntent();
+        listOfCameraNames = intent.getStringArrayListExtra("listOfCameraNames");
+
 
         init();
         setAdapterOtions();
@@ -48,13 +55,14 @@ public class ViewerActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        camerasArrayList.clear();
                         camerasArrayList.add(dataSnapshot.getValue(Camera.class));
                         //получение обьектов из ветки и запись их в ArrayList
                         camera = camerasArrayList.get(cameraIndex);
-                        if (camera.getStatus() == 1) layout.setBackgroundResource(R.drawable.grey_status);
-                        else if (camera.getStatus() == 2) layout.setBackgroundResource(R.drawable.yellow_status);
-                        else if (camera.getStatus() == 3) layout.setBackgroundResource(R.drawable.red_status);
-                        Toast toast = Toast.makeText(getApplicationContext(), "Selected: " + cameraIndex, Toast.LENGTH_SHORT);
+                        if (camera.getStatus() == 1) statusView.setImageResource(R.drawable.grey_status);
+                        else if (camera.getStatus() == 2) statusView.setImageResource(R.drawable.yellow_status);
+                        else if (camera.getStatus() == 3) statusView.setImageResource(R.drawable.red_status);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Status: " + camera.getStatus(), Toast.LENGTH_SHORT);
                         toast.show();
                     }
 
@@ -90,16 +98,16 @@ public class ViewerActivity extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
         spinner.setPrompt("Cameras");
-        spinner.setSelection(2);
+        spinner.setSelection(0);
     }
 
     private void init() {
         spinner = (Spinner) findViewById(R.id.spinner);
-        layout = (ConstraintLayout) findViewById(R.id.constraintLayout);
+        statusView = (ImageView) findViewById(R.id.statusView);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Camera");
         camera = new Camera();
-        listOfCameraNames = new ArrayList<>();
+
         camerasArrayList = new ArrayList<>();
     }
 }
