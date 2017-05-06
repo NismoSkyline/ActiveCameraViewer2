@@ -11,13 +11,16 @@ class CameraController {
         model = cameraModel;
     }
 
-    public void clickCamera(String id) {
-        checkAllcameraStatus();
-        model.setCameraTrigger(id);
-    }
-
-    private void checkAllcameraStatus() {
-
+    public void clickCamera(int cameraID, int cameraStatus) {
+        int status = 1;
+        if(cameraStatus == 1){
+            status = 2;
+        } else if (cameraStatus == 2){
+            status = 3;
+        } else if (cameraStatus == 3){
+            status = 1;
+        }
+        model.setStatus(cameraID, status);
     }
 
 }

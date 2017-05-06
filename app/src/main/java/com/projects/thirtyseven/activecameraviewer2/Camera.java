@@ -6,6 +6,7 @@ package com.projects.thirtyseven.activecameraviewer2;
 
 class Camera {
     private int status;
+    private int cameraName;
 
     public Camera() {
     }
@@ -18,4 +19,7 @@ class Camera {
         return status;
     }
 
+    public int getCameraName() {
+        return cameraName;
+    }
 }

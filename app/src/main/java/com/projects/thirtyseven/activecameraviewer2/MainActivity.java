@@ -6,18 +6,20 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     GridLayout cameraGridLayout;
-    ArrayList<FrameLayout> cameraFrameLayoutButtons; //ArrayList в котором будут находится кнопки
-    ArrayList<String> listOfCameraNames;  //ArrayList в котором будут находится имена камер
-
+    ArrayList<FrameLayout> cameraFrameLayoutButtons;
+    ArrayList<String> listOfCameraNames;
+    ArrayList<String> normalCameraNames;
     View.OnClickListener onClickListener;
     Button toViewerActivity;
 
@@ -29,71 +31,55 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cameraController.clickCamera(v.getId(), cameraModel.getStatus(v.getId()));
+                refreshView();
+            }
+        };
         init();
 
         toViewerActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, ViewerActivity.class);
-                i.putStringArrayListExtra("listOfCameraNames", listOfCameraNames);
+                i.putStringArrayListExtra("normalCameraNames", normalCameraNames);
                 startActivity(i);
             }
         });
 
-        refreshView();  //Мы используем MainActivity как Представление следоватьельно мы должны его обновить
-
-        onClickListener = new View.OnClickListener() { //МультиЛистенер т.к. мы имеем множество кнопок
-            @Override
-            public void onClick(View v) {
-                cameraController.clickCamera(String.valueOf(v.getId()));
-                //При нажатии контроллер мы передаём String'овое значение т.к. название камеры и Id совпадают
-                refreshView(); //Обновляем View
-            }
-        };
     }
 
     private void refreshView() {
-        //В методе For each : - двоеточие используется для Изьятия единного из множества
-        // cameraFrameLayoutButtons - список всех кнопок
         for (FrameLayout button : cameraFrameLayoutButtons) {
-            ImageView image = (ImageView) button.getChildAt(0);
-            // Мы определили Image для более удоьного использования в дальнейшем.
-            //getChildAt - получение с FrameLayout ребенка под индексом 0. В нашем случае это Картинка Статуса камеры
-            int cameraStatus = cameraModel.getCameraStatus(String.valueOf(button.getId()));
-            //Определяем статус взяв с модели Id.
-
-            //В зависимости от статуса меняем картинку статуса камеры
-            if (cameraStatus == 0) image.setImageResource(R.drawable.grey_status);
-            else if (cameraStatus == 1) image.setImageResource(R.drawable.yellow_status);
-            else if (cameraStatus == 2) image.setImageResource(R.drawable.red_status);
+            if (button.getId() == cameraModel.getCameraID()) {
+                ImageView image = (ImageView) button.getChildAt(0);
+                int cameraStatus = cameraModel.getStatus(button.getId());
+                Toast.makeText(getApplicationContext(), "Status: " + cameraStatus, Toast.LENGTH_SHORT).show();
+                if (cameraStatus == 1) image.setImageResource(R.drawable.grey_status);
+                else if (cameraStatus == 2) image.setImageResource(R.drawable.yellow_status);
+                else if (cameraStatus == 3) image.setImageResource(R.drawable.red_status);
+            }
         }
     }
 
     private void init() {
         cameraFrameLayoutButtons = new ArrayList<>();
         listOfCameraNames = new ArrayList<>();
-        //Инициализируем наш ArrayList'ы
-
+        normalCameraNames = new ArrayList<>();
         cameraGridLayout = (GridLayout) findViewById(R.id.cameraGridLayout);
-        //Layout с которым мы работаем
-
-        //Цикл благодаря которому мы можем инициализировать множество элементов и засетить на них Listener'ы
-        //Не засоряя код кучей повторяющихся строчек
         for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
-            //С layout'а мы получаем количество детей, и по количеству выполняем цикл
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
-            //Получаем ребёнка по его индексу
             cameraFrameLayoutButtons.add(button);
             listOfCameraNames.add(getResources().getResourceEntryName(button.getId()));
-            //Добавили элемент в ArrayList
+            normalCameraNames.add("Камера " + Integer.valueOf(i + 1));
             button.setOnClickListener(onClickListener);
-            //Добавили Listener
         }
-
         cameraModel = new CameraModel(listOfCameraNames);
         cameraController = new CameraController(cameraModel);
-
         toViewerActivity = (Button) findViewById(R.id.goToViewerActivity);
     }
 }

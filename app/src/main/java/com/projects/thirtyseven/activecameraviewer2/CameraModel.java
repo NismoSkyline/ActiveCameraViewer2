@@ -7,17 +7,27 @@ import java.util.ArrayList;
  */
 
 class CameraModel {
-    private String cameraTrigger;
+    int status;
+    int cameraID;
+
+    public int getCameraID() {
+        return cameraID;
+    }
+
+    public void setCameraID(int cameraID) {
+        this.cameraID = cameraID;
+    }
 
     public CameraModel(ArrayList<String> listOfCameraNames) {
 
     }
 
-    public int getCameraStatus(String s) {
-        return 0;
+    public int getStatus(int cameraID) {
+        return status;
     }
 
-    public void setCameraTrigger(String cameraTrigger) {
-        this.cameraTrigger = cameraTrigger;
+    public void setStatus(int cameraID, int status) {
+        this.cameraID = cameraID;
+        this.status = status;
     }
 }

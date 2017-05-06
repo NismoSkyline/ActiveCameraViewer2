@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ActiveCameraViewer2</string>
+
+    <string-array name="camList">
+        <item>Камера 1</item>
+        <item>Камера 2</item>
+        <item>Камера 3</item>
+        <item>Камера 4</item>
+        <item>Камера 5</item>
+        <item>Камера 6</item>
+    </string-array>
 </resources>
