@@ -20,8 +20,9 @@ class CameraController {
     private CameraModel model;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
-    ArrayList cameraList;
+    ArrayList<Long> cameraList;
     Camera camera;
+    int status;
 
     public CameraController(CameraModel cameraModel) {
         model = cameraModel;
@@ -42,7 +43,6 @@ class CameraController {
 
             }
         });
-
 //        databaseReference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
@@ -57,7 +57,6 @@ class CameraController {
 //
 //            }
 //        });
-        int status = 1;
         if (cameraStatus == 1) {
             status = 2;
         } else if (cameraStatus == 2) {
@@ -65,11 +64,10 @@ class CameraController {
         } else if (cameraStatus == 3) {
             status = 1;
         }
-        model.setStatus(cameraID, status);
+//        model.setStatus(cameraID, status);
     }
-
     private void collectCameras(Map<String, Object> cameras) {
-        ArrayList<Long> cameraList = new ArrayList<>();
+        cameraList = new ArrayList<>();
         for (Map.Entry<String, Object> entry : cameras.entrySet()){
             Map singleCamera = (Map) entry.getValue();
             cameraList.add((Long) singleCamera.get("status"));

@@ -36,6 +36,7 @@ public class ViewerActivity extends AppCompatActivity {
     ArrayList<Camera> camerasArrayList;
     Camera camera;
     Camera changedCamera;
+    int cameraName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,46 +53,47 @@ public class ViewerActivity extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, final int cameraNumber, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int cameraNumber, long id) {
                 textView.setText(String.valueOf(cameraNumber + 1));
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Выбрана камера: " + Integer.valueOf(cameraNumber + 1), Toast.LENGTH_LONG);
                 toast.show();
-                databaseReference.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        changedCamera = dataSnapshot.getValue(Camera.class);
-                        changedCamera.getCameraName();
-                        if (changedCamera.getCameraName() == Integer.valueOf(cameraNumber + 1))
-                            changeStatus();
-                        else ;
-                        Toast.makeText(ViewerActivity.this, "Изменён статус камеры: " +
-                                String.valueOf(changedCamera.getCameraName()), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                cameraName = Integer.valueOf(cameraNumber + 1);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                changedCamera = dataSnapshot.getValue(Camera.class);
+                changedCamera.getCameraName();
+                if (Integer.valueOf(changedCamera.getCameraName()) == Integer.valueOf(cameraName))
+                    changeStatus();
+                else ;
+                Toast.makeText(ViewerActivity.this, "Изменён статус камеры: " +
+                        changedCamera.getCameraName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
