@@ -64,7 +64,6 @@ class CameraController {
         } else if (cameraStatus == 3) {
             status = 1;
         }
-//        model.setStatus(cameraID, status);
     }
     private void collectCameras(Map<String, Object> cameras) {
         cameraList = new ArrayList<>();

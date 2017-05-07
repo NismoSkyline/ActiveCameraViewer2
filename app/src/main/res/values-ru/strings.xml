@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Статус Камер</string>
+    <string name="camera">"Камера "</string>
+    <string name="viewer_mode">Режим просмотра</string>
+    <string name="selectedCamera">"Выбранна камера: "</string>
+    <string name="changedStutusOfCamera">"Изменен статус камеры: "</string>
+</resources>

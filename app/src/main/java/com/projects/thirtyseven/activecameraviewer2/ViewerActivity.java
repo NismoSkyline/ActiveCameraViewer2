@@ -56,7 +56,7 @@ public class ViewerActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int cameraNumber, long id) {
                 textView.setText(String.valueOf(cameraNumber + 1));
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "Выбрана камера: " + Integer.valueOf(cameraNumber + 1), Toast.LENGTH_LONG);
+                        getString(R.string.selectedCamera) + Integer.valueOf(cameraNumber + 1), Toast.LENGTH_LONG);
                 toast.show();
                 cameraName = Integer.valueOf(cameraNumber + 1);
             }
@@ -76,9 +76,9 @@ public class ViewerActivity extends AppCompatActivity {
                 changedCamera.getCameraName();
                 if (Integer.valueOf(changedCamera.getCameraName()) == Integer.valueOf(cameraName))
                     changeStatus();
-                else ;
-                Toast.makeText(ViewerActivity.this, "Изменён статус камеры: " +
+                else Toast.makeText(ViewerActivity.this, getString(R.string.changedStutusOfCamera) +
                         changedCamera.getCameraName(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cameraController.clickCamera(v.getId(), cameraModel.getStatus(v.getId()));
+                Toast.makeText(MainActivity.this, String.valueOf(cameraModel.getStatus(v.getId())), Toast.LENGTH_SHORT).show();
                 refreshView();
             }
         };
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private void refreshView() {
         for (FrameLayout button : cameraFrameLayoutButtons) {
             if (button.getId() == cameraModel.getCameraID()) {
+                Toast.makeText(this, String.valueOf(button.getId()), Toast.LENGTH_SHORT).show();
                 ImageView image = (ImageView) button.getChildAt(0);
                 int cameraStatus = cameraModel.getStatus(button.getId());
                 Toast.makeText(getApplicationContext(), "Status: " + cameraStatus, Toast.LENGTH_SHORT).show();
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             cameraFrameLayoutButtons.add(button);
             listOfCameraNames.add(getResources().getResourceEntryName(button.getId()));
-            normalCameraNames.add("Камера " + Integer.valueOf(i + 1));
+            normalCameraNames.add(getString(R.string.camera) + Integer.valueOf(i + 1));
             button.setOnClickListener(onClickListener);
         }
         cameraModel = new CameraModel(listOfCameraNames);
