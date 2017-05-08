@@ -62,43 +62,47 @@ public class ViewerActivity extends AppCompatActivity {
                         getString(R.string.selectedCamera) + Integer.valueOf(cameraNumber + 1), Toast.LENGTH_LONG);
                 toast.show();
                 cameraName = Integer.valueOf(cameraNumber + 1);
+                databaseReference.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        changedCamera = dataSnapshot.getValue(Camera.class);
+                        changedCamera.getCameraName();
+                        if (Integer.valueOf(changedCamera.getCameraName()) == Integer.valueOf(cameraName))
+                            changeStatus();
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        changedCamera = dataSnapshot.getValue(Camera.class);
+                        changedCamera.getCameraName();
+                        if (Integer.valueOf(changedCamera.getCameraName()) == Integer.valueOf(cameraName))
+                            changeStatus();
+                        else Toast.makeText(ViewerActivity.this, getString(R.string.changedStutusOfCamera) +
+                                changedCamera.getCameraName(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                changedCamera = dataSnapshot.getValue(Camera.class);
-                changedCamera.getCameraName();
-                if (Integer.valueOf(changedCamera.getCameraName()) == Integer.valueOf(cameraName))
-                    changeStatus();
-                else Toast.makeText(ViewerActivity.this, getString(R.string.changedStutusOfCamera) +
-                        changedCamera.getCameraName(), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
 
