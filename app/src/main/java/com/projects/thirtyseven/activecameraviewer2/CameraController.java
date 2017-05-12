@@ -26,6 +26,7 @@ class CameraController {
     ArrayList<Long> cameraList;
     Camera camera;
     int status;
+    int name;
     private Integer numericCameraName;
 
     public CameraController(CameraModel cameraModel) {
@@ -40,8 +41,8 @@ class CameraController {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 camera = dataSnapshot.getValue(Camera.class);
-                camera.getCameraName();
-                camera.getStatus();
+                name = camera.getCameraName();
+                status = camera.getStatus();
             }
 
             @Override
@@ -49,18 +50,16 @@ class CameraController {
 
             }
         });
-        changeStatus(cameraNumber);
+        changeStatus(status, name);
     }
 
-    private void changeStatus(Integer cameraNumber) {
-        camera.setCameraName(cameraNumber);
-        if (camera.getStatus() == 1)
+    private void changeStatus(int status, int name) {
+        camera.setCameraName(name);
+        if (status == 1)
             camera.setStatus(2);
-        else if (camera.getStatus() == 2)
+        else if (status == 2)
             camera.setStatus(3);
-        else if (camera.getStatus() == 3)
-            camera.setStatus(1);
-        else if (camera.getStatus() == 0)
+        else if (status == 3)
             camera.setStatus(1);
         databaseReference.setValue(camera);
     }
