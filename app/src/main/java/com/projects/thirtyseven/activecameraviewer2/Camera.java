@@ -11,6 +11,11 @@ class Camera {
     public Camera() {
     }
 
+    public Camera(int status, int cameraName) {
+        this.status = status;
+        this.cameraName = cameraName;
+    }
+
     public void setStatus(int status) {
         this.status = status;
     }

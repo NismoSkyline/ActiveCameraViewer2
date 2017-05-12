@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<FrameLayout> cameraFrameLayoutButtons;
     ArrayList<String> listOfCameraNames;
     ArrayList<String> normalCameraNames;
+    Camera[] camList;
     View.OnClickListener onClickListener;
     Button toViewerActivity;
     FirebaseDatabase database;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     Camera camera;
     ProgressBar progressBar;
     TextView textViewProgress;
+    Camera newCam;
+    ImageView image;
 
     private CameraController cameraController;
     private CameraModel cameraModel;
@@ -54,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                     if (button.getId() == cameraModel.getCameraID()) {
                         for (int i = 0; i < cameraFrameLayoutButtons.size(); i++) {
                             if (cameraFrameLayoutButtons.get(i).getId() == button.getId()) {
-                                cameraController.clickCamera(Integer.valueOf(i + 1));
+                                newCam = camList[i];
+                                cameraController.clickCamera(Integer.valueOf(i + 1), newCam.getStatus(), camList);
                                 Toast.makeText(MainActivity.this, String.valueOf(i + 1), Toast.LENGTH_SHORT).show();
                                 break;
                             }
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             button.setClickable(false);
         }
-
+        camList = new Camera[cameraGridLayout.getChildCount()];
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -83,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 camera = dataSnapshot.getValue(Camera.class);
                 camera.getCameraName();
                 camera.getStatus();
+                int position = camera.getCameraName() - 1;
+                camList[position] = new Camera(camera.getStatus(), camera.getCameraName());
                 refresh();
             }
 
@@ -92,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 camera = dataSnapshot.getValue(Camera.class);
                 camera.getCameraName();
                 camera.getStatus();
+                camList[camera.getCameraName()-1] = new Camera(camera.getStatus(), camera.getCameraName());
                 refresh();
+
             }
 
             @Override
@@ -121,18 +129,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void refresh() {
+    private int getStatus(Integer integer) {
+        int camStatus = 0;
+        for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
+            if (i+1 == integer && camera.getCameraName() == integer) {
+                camStatus = camera.getStatus();
+            }
+        }
+        return camStatus;
+    }
 
+    private void refresh() {
         for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             button.getChildAt(0);
             if (camera.getCameraName() == Integer.valueOf(i + 1)) {
-                ImageView image = (ImageView) button.getChildAt(0);
+                camera.getCameraName();
+                camera.getStatus();
+                image = (ImageView) button.getChildAt(0);
                 if (camera.getStatus() == 1) image.setImageResource(R.drawable.grey_status);
                 else if (camera.getStatus() == 2)
                     image.setImageResource(R.drawable.yellow_status);
                 else if (camera.getStatus() == 3)
                     image.setImageResource(R.drawable.red_status);
+
             }
         }
     }
