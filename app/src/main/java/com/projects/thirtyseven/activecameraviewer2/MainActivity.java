@@ -11,7 +11,15 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -22,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> normalCameraNames;
     View.OnClickListener onClickListener;
     Button toViewerActivity;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    Camera camera;
+    ProgressBar progressBar;
+    TextView textViewProgress;
 
     private CameraController cameraController;
     private CameraModel cameraModel;
@@ -36,12 +49,67 @@ public class MainActivity extends AppCompatActivity {
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cameraController.clickCamera(v.getId(), cameraModel.getStatus(v.getId()));
-                Toast.makeText(MainActivity.this, String.valueOf(cameraModel.getStatus(v.getId())), Toast.LENGTH_SHORT).show();
-                refreshView();
+                cameraController.getId(v.getId());
+                for (FrameLayout button : cameraFrameLayoutButtons) {
+                    if (button.getId() == cameraModel.getCameraID()) {
+                        for (int i = 0; i < cameraFrameLayoutButtons.size(); i++) {
+                            if (cameraFrameLayoutButtons.get(i).getId() == button.getId()) {
+                                cameraController.clickCamera(Integer.valueOf(i + 1));
+                                Toast.makeText(MainActivity.this, String.valueOf(i + 1), Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
         };
         init();
+
+        for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
+            FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
+            button.setClickable(false);
+        }
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
+                textViewProgress.setVisibility(View.INVISIBLE);
+                for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
+                    FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
+                    button.setClickable(true);
+                }
+                camera = dataSnapshot.getValue(Camera.class);
+                camera.getCameraName();
+                camera.getStatus();
+                refresh();
+            }
+
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                camera = dataSnapshot.getValue(Camera.class);
+                camera.getCameraName();
+                camera.getStatus();
+                refresh();
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         toViewerActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,19 +119,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
-    private void refreshView() {
-        for (FrameLayout button : cameraFrameLayoutButtons) {
-            if (button.getId() == cameraModel.getCameraID()) {
-                Toast.makeText(this, String.valueOf(button.getId()), Toast.LENGTH_SHORT).show();
+    private void refresh() {
+
+        for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
+            FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
+            button.getChildAt(0);
+            if (camera.getCameraName() == Integer.valueOf(i + 1)) {
                 ImageView image = (ImageView) button.getChildAt(0);
-                int cameraStatus = cameraModel.getStatus(button.getId());
-                Toast.makeText(getApplicationContext(), "Status: " + cameraStatus, Toast.LENGTH_SHORT).show();
-                if (cameraStatus == 1) image.setImageResource(R.drawable.grey_status);
-                else if (cameraStatus == 2) image.setImageResource(R.drawable.yellow_status);
-                else if (cameraStatus == 3) image.setImageResource(R.drawable.red_status);
+                if (camera.getStatus() == 1) image.setImageResource(R.drawable.grey_status);
+                else if (camera.getStatus() == 2)
+                    image.setImageResource(R.drawable.yellow_status);
+                else if (camera.getStatus() == 3)
+                    image.setImageResource(R.drawable.red_status);
             }
         }
     }
@@ -83,5 +152,9 @@ public class MainActivity extends AppCompatActivity {
         cameraModel = new CameraModel(listOfCameraNames);
         cameraController = new CameraController(cameraModel);
         toViewerActivity = (Button) findViewById(R.id.goToViewerActivity);
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("Camera");
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        textViewProgress = (TextView) findViewById(R.id.textViewProgress);
     }
 }

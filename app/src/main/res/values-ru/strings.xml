@@ -5,4 +5,5 @@
     <string name="viewer_mode">Режим просмотра</string>
     <string name="selectedCamera">"Выбранна камера: "</string>
     <string name="changedStutusOfCamera">"Изменен статус камеры: "</string>
+    <string name="loading_data">Загрузка данных...</string>
 </resources>

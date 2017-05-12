@@ -15,6 +15,10 @@ class Camera {
         this.status = status;
     }
 
+    public void setCameraName(int cameraName) {
+        this.cameraName = cameraName;
+    }
+
     public int getStatus() {
         return status;
     }

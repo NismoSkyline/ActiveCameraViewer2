@@ -1,5 +1,8 @@
 package com.projects.thirtyseven.activecameraviewer2;
 
+import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,19 +26,22 @@ class CameraController {
     ArrayList<Long> cameraList;
     Camera camera;
     int status;
+    private Integer numericCameraName;
 
     public CameraController(CameraModel cameraModel) {
         model = cameraModel;
     }
 
-
-    public void clickCamera(int cameraID, int cameraStatus) {
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Camera");
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void clickCamera(final Integer cameraNumber) {
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("Camera").child(String.valueOf("camera" + cameraNumber));
+        camera = new Camera();
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                collectCameras((Map<String,Object>) dataSnapshot.getValue());
+                camera = dataSnapshot.getValue(Camera.class);
+                camera.getCameraName();
+                camera.getStatus();
             }
 
             @Override
@@ -43,33 +49,26 @@ class CameraController {
 
             }
         });
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                cameraList = new ArrayList<String>();
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    cameraList.add(String.valueOf(dataSnapshot1.geValue()));
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-        if (cameraStatus == 1) {
-            status = 2;
-        } else if (cameraStatus == 2) {
-            status = 3;
-        } else if (cameraStatus == 3) {
-            status = 1;
-        }
+        changeStatus(cameraNumber);
     }
-    private void collectCameras(Map<String, Object> cameras) {
-        cameraList = new ArrayList<>();
-        for (Map.Entry<String, Object> entry : cameras.entrySet()){
-            Map singleCamera = (Map) entry.getValue();
-            cameraList.add((Long) singleCamera.get("status"));
-        }
+
+    private void changeStatus(Integer cameraNumber) {
+        camera.setCameraName(cameraNumber);
+        if (camera.getStatus() == 1)
+            camera.setStatus(2);
+        else if (camera.getStatus() == 2)
+            camera.setStatus(3);
+        else if (camera.getStatus() == 3)
+            camera.setStatus(1);
+        else if (camera.getStatus() == 0)
+            camera.setStatus(1);
+        databaseReference.setValue(camera);
     }
+
+
+    public void getId(int id) {
+        model.setCameraID(id);
+    }
+
+
 }

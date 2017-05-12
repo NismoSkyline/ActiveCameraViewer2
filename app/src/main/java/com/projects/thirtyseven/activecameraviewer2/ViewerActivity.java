@@ -77,9 +77,6 @@ public class ViewerActivity extends AppCompatActivity {
                         changedCamera.getCameraName();
                         if (Integer.valueOf(changedCamera.getCameraName()) == Integer.valueOf(cameraName))
                             changeStatus();
-                        else Toast.makeText(ViewerActivity.this, getString(R.string.changedStutusOfCamera) +
-                                changedCamera.getCameraName(), Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
@@ -110,7 +107,7 @@ public class ViewerActivity extends AppCompatActivity {
         Window window = ViewerActivity.this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(ViewerActivity.this,R.color.myStatusBarColor));
+        window.setStatusBarColor(ContextCompat.getColor(ViewerActivity.this, R.color.myStatusBarColor));
     }
 
     private void changeStatus() {
