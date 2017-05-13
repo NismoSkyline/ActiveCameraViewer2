@@ -69,9 +69,9 @@ class CameraController {
     private void checkCamera(Camera[] camList) {
         int length = camList.length;
         Camera cam;
-        for(int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             cam = camList[i];
-            if(cam.getStatus() == 3){
+            if (cam.getStatus() == 3) {
                 cam.setStatus(2);
                 cam.setCameraName(cam.getCameraName());
                 databaseReference = database.getReference("Camera").child("camera" + cam.getCameraName());
@@ -85,4 +85,16 @@ class CameraController {
         model.setCameraID(id);
     }
 
+    public void clean(Camera[] camList) {
+        database = FirebaseDatabase.getInstance();
+        int length = camList.length;
+        Camera cam;
+        for (int i = 0; i < length; i++) {
+            cam = camList[i];
+            cam.setStatus(1);
+            cam.setCameraName(cam.getCameraName());
+            databaseReference = database.getReference("Camera").child("camera" + cam.getCameraName());
+            databaseReference.setValue(cam);
+        }
+    }
 }

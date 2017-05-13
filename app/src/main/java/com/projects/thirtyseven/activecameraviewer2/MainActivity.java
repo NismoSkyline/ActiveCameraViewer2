@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textViewProgress;
     Camera newCam;
     ImageView image;
+    Button clean;
 
     private CameraController cameraController;
     private CameraModel cameraModel;
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 camera = dataSnapshot.getValue(Camera.class);
                 camera.getCameraName();
                 camera.getStatus();
-                camList[camera.getCameraName()-1] = new Camera(camera.getStatus(), camera.getCameraName());
+                camList[camera.getCameraName() - 1] = new Camera(camera.getStatus(), camera.getCameraName());
                 refresh();
 
             }
@@ -118,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        clean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cameraController.clean(camList);
             }
         });
 
@@ -164,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
         cameraModel = new CameraModel(listOfCameraNames);
         cameraController = new CameraController(cameraModel);
         toViewerActivity = (Button) findViewById(R.id.goToViewerActivity);
+        clean = (Button) findViewById(R.id.cleanButton);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Camera");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
