@@ -5,4 +5,5 @@
     <string name="selectedCamera">"Selected Camera: "</string>
     <string name="changedStutusOfCamera">"Changed status of camera: "</string>
     <string name="loading_data">Loading data...</string>
+    <string name="clean">Clean</string>
 </resources>

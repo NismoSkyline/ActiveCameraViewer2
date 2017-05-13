@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                             if (cameraFrameLayoutButtons.get(i).getId() == button.getId()) {
                                 newCam = camList[i];
                                 cameraController.clickCamera(Integer.valueOf(i + 1), newCam.getStatus(), camList);
-                                Toast.makeText(MainActivity.this, String.valueOf(i + 1), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(MainActivity.this, String.valueOf(i + 1), Toast.LENGTH_SHORT).show();
                                 break;
                             }
                         }
@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             button.setClickable(false);
+            clean.setClickable(false);
+            clean.setVisibility(View.INVISIBLE);
         }
 
         camList = new Camera[cameraGridLayout.getChildCount()];
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
                     FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
                     button.setClickable(true);
+                    clean.setClickable(true);
+                    clean.setVisibility(View.VISIBLE);
                 }
                 camera = dataSnapshot.getValue(Camera.class);
                 camera.getCameraName();

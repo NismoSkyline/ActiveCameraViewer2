@@ -58,9 +58,9 @@ public class ViewerActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int cameraNumber, long id) {
                 textView.setText(String.valueOf(cameraNumber + 1));
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        getString(R.string.selectedCamera) + Integer.valueOf(cameraNumber + 1), Toast.LENGTH_LONG);
-                toast.show();
+//                Toast toast = Toast.makeText(getApplicationContext(),
+//                        getString(R.string.selectedCamera) + Integer.valueOf(cameraNumber + 1), Toast.LENGTH_LONG);
+//                toast.show();
                 cameraName = Integer.valueOf(cameraNumber + 1);
                 databaseReference.addChildEventListener(new ChildEventListener() {
                     @Override

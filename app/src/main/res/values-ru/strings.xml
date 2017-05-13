@@ -6,4 +6,5 @@
     <string name="selectedCamera">"Выбранна камера: "</string>
     <string name="changedStutusOfCamera">"Изменен статус камеры: "</string>
     <string name="loading_data">Загрузка данных...</string>
+    <string name="clean">Очистить</string>
 </resources>
