@@ -54,8 +54,9 @@ class CameraController {
         if (status == 1) {
             camera.setStatus(2);
         } else if (status == 2) {
+            checkCamera(camList);
             camera.setStatus(3);
-            //checkCamera(status, name, camList);
+
 
         } else if (status == 3) {
             camera.setStatus(1);
@@ -65,24 +66,19 @@ class CameraController {
 
     }
 
-    /*private void checkCamera(int status, int name, Camera[] camList) {
-        for (int i = 0; i < camList.length; i++) {
-            Camera cam = camList[name - 1];
-            if (i != name - 1) {
-                if (cam.getStatus() == 3) {
-                    databaseReference = database.getReference("Camera").child("camera" + (i + 1));
-                    cam.setCameraName(i + 1);
-                    cam.setStatus(2);
-                    databaseReference.setValue(cam);
-                }
-            } else {
-                databaseReference = database.getReference("Camera").child("camera" + (name));
-                cam.setCameraName(name);
-                cam.setStatus(3);
+    private void checkCamera(Camera[] camList) {
+        int length = camList.length;
+        Camera cam;
+        for(int i = 0; i < length; i++){
+            cam = camList[i];
+            if(cam.getStatus() == 3){
+                cam.setStatus(2);
+                cam.setCameraName(cam.getCameraName());
+                databaseReference = database.getReference("Camera").child("camera" + cam.getCameraName());
                 databaseReference.setValue(cam);
             }
         }
-    }*/
+    }
 
 
     public void getId(int id) {
