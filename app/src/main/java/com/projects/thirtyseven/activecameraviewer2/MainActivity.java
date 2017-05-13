@@ -74,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
             FrameLayout button = (FrameLayout) cameraGridLayout.getChildAt(i);
             button.setClickable(false);
         }
+
         camList = new Camera[cameraGridLayout.getChildCount()];
+
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -127,16 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-    private int getStatus(Integer integer) {
-        int camStatus = 0;
-        for (int i = 0; i < cameraGridLayout.getChildCount(); i++) {
-            if (i+1 == integer && camera.getCameraName() == integer) {
-                camStatus = camera.getStatus();
-            }
-        }
-        return camStatus;
     }
 
     private void refresh() {
